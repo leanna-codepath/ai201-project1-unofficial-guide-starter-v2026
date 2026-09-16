@@ -79,6 +79,32 @@ def fallback_split(
 
     return chunks
 
+def get_sections(document: str) ->  tuple[str, list[tuple[str, str]]]:
+    title = ""
+    heading  = ""
+    sections = []
+    section = []
+
+    for line in document.split("\n"):
+        if line.startswith('## '):
+            #If we were tracking a previous section, add it to sections
+            if section:
+                sections.append(
+                    (heading if heading else "Intro", "\n".join(section).strip())
+                )
+            #Start a new section
+            heading = line[3:].strip()
+            section = []
+        elif line.startswith('# ') and not title:
+            title = line[2:].strip()
+        else:
+            section.append(line)
+
+    #Add last section to the list
+    sections.append(
+            (heading if heading else "Intro", "\n".join(section).strip())
+        )
+    return (title, sections)
 
 def split_documents(documents: list[Document]) -> list[Chunk]:
     """
@@ -97,7 +123,26 @@ def split_documents(documents: list[Document]) -> list[Chunk]:
       - Would splitting on paragraph breaks keep more thoughts intact than
         splitting on a character count?
     """
-    return fallback_split(documents)
+    chunks = []
+
+    for document in documents:
+        title, sections = get_sections(document.text)
+        index = 0
+
+        for heading, section in sections:
+            text = f"{title}, {heading}\n\n{section}"
+
+            chunks.append(
+                        Chunk(
+                            text=text,
+                            source=document.source,
+                            index=index,
+                            produced_by="chunker.py::split_documents",
+                        )
+                    )
+
+            index += 1
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:

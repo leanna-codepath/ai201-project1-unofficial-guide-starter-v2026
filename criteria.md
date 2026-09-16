@@ -66,7 +66,7 @@ might hover near the relevance gate boundary.
 
 ## 4. Chunks come from distinct sections
 
-For at least 4 out of 5 of my questions, the sampled chunk starts with a section title of
+For at least 4 out of 5 of my questions, the sampled chunk starts with a title and a section title of
 format "## <Section Title>". 
 
 <!-- YOU WRITE THIS ONE.
@@ -90,6 +90,14 @@ chunks are the right size if I can clearly tell which section the system's answe
 are from. Without this information, it is difficult to tell where the system is getting
 its info. This is especially true for my criteria questions, as 4 out of 5 can be clearly
 sourced from a specific document. The fifth, and most complex, question may fail this criteria.
+         > **Revised in unit 2:** For at least 5 of 5 questions, the sampled chunk starts with a
+         > title and a section title of format "<Title>, <Section Title>". 
+         >
+         > **Why revised:**
+         > I realized that multiple of the guide documents shared section headings, which
+         > could make it difficult for me to determine exactly which document the specific
+         > section came from. This has been revised with the addition of a Title in the chunk.
+
 
 
 ---
