@@ -26,7 +26,7 @@ QUESTIONS = [
     {"question": "How many shops does Elder Ness have?", "expects": "one"},
     {"question": "How often do buses run in Halden Bay in a day?", "expects": "four times"},
     {"question": "In what year did the pier in Pellew Sands catch on fire?", "expects": "1978"},
-    {"question": "Does Brightwater or Corry Vale have cheaper accommodations?", "expects": "corry Vale"},
+    {"question": "Does Brightwater or Corry Vale have cheaper accommodations?", "expects": "Corry Vale"},
     {"question": "Which places are busiest in October?", "expects": "Brightwater, Elder Ness, Marchwood"},
 ]
 

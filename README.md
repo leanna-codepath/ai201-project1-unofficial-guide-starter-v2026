@@ -26,11 +26,15 @@
      this repo.
 
      Milestone 5. -->
+This system focuses on a corpus involving 14 travel guides about a region with 9 different towns,
+along with general guides on accessibility, eating, regional transportation, seasons, and walking. The system
+answers questions about the towns in this region, such as where to eat, when do buses run, which locations may
+have cheaper accomodations, etc.
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size:** 1000
+**Overlap:** 120
 
 <!-- What about YOUR documents made you pick these numbers? Short posts and
      long sectioned guides don't want the same chunking, and "800 seemed
@@ -41,6 +45,17 @@
      more than pretending you got it right first time.
 
      Milestone 3. -->
+
+I picked these numbers because each guide is formatted with a title and distinct sections, marked with a "#" 
+and a "##" respecitively. Additionally, each section has a maximum of 1000 characters in it, including their
+section headers. This gave me the idea for the chunk size and to fashion the chunks after the sections. I
+initially was going to label chunks just by their headers before I recognized that many of the guides have
+identical header names, making it difficult to determine which guide a section was coming from. To compensate
+for this, I also added the title at the top of each document to the chunk labels.
+
+Using this method, I generated more, smaller chunks. But I could also guarantee that all these chunks included
+relevant information grouped together and I could tell where they were sourced from. Additionally, these chunks
+no longer included sentences or paragraphs that were cut off in the middle or too short.
 
 ## Sample Chunks
 
@@ -108,10 +123,16 @@ cards only.
      visible. Milestone 4. -->
 
 **Question:**
+In what year did the pier in Pellew Sands catch on fire?
 
 **Answer:**
 
 ```
+(best distance 0.194, cutoff 0.6)
+
+The pier in Pellew Sands was partly destroyed by fire in 1978 (guide_pellew_sands.md).
+
+Sources retrieved: guide_pellew_sands.md
 ```
 
 **My relevance cutoff:**
@@ -127,7 +148,19 @@ cards only.
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| How many shops does Elder Ness have? | Yes | 0.3657 |
+| How often do buses run in Halden Bay in a day? | Yes | 0.2891 |
+| In what year did the pier in Pellew Sands catch on fire? | Yes | 0.1944 |
+| Does Brightwater or Corry Vale have cheaper accommodations? | Yes | 0.2557 |
+| Which places are busiest in October? | Yes | 0.4777 |
+| What is the capital of Mongolia? | No | 0.7850 |
+| How do I change the oil in a diesel engine? | No | 0.8834 |
+| Who won the 1994 World Cup? | No | 0.9351 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.8482 |
+| How do I write a for loop in Rust? | No | 0.8419 |
+
+Looking at these two groups of questions, the corpus question distances range between 0.19-0.47 while the
+non-corpus questions range between 0.78-0.93. Seeing this, I decided to put my relevance cutoff 0.65.
 
 ## How I Used AI
 
