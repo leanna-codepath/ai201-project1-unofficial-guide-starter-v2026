@@ -23,8 +23,12 @@ For at least 4 of my 5 test questions, the retrieved chunks include one that
 contains the answer.
 
 **Why this target:**
-<!-- e.g. "One of my questions is about a topic only two documents mention, so
-     I expect that one to be hard." -->
+4 out of 5 of my questions have answers which can be found in a specific document,
+whose title is generally refrenced in the question itself. This should make it easier
+to find. The fifth question involves compiling answers from multiple documents, and it 
+isn't obvious which documents those are. Additionally, these answers may not be obvious 
+in each document. As such, I expect this question to fail. If all five questions passed,
+it would imply my questions are too simple, rather than my chunking being well-formed.
 
 ---
 
@@ -33,8 +37,10 @@ contains the answer.
 Every answer the system produces names at least one source document.
 
 **Why this target:**
-<!-- Why all five and not four? What about your setup makes that achievable —
-     or what would have to go wrong for it not to be? -->
+Asking the system to name at least one source document for every answer it gives ensures
+its grounded. If the system couldn't name a source, it implies that the model is answering
+from what it already knows, which may not be the correct answer. If this is the case,
+then something needs to be fixed in the system's build.
 
 ---
 
@@ -50,12 +56,18 @@ in at least 4 of 5 tries.
      just keep five of them, or the "4 of 5" above has nothing to be 4 of. -->
 
 **Why this target:**
-<!-- What did your distances look like when you set the cutoff in Milestone 4?
-     Was there a clean gap, or did the two groups overlap? -->
+When presented with a question my documents clearly don't cover, the relevance gate
+should be good enough that it will return "I don't have enough information about that"
+rather than attempt to answer the question with irrelevant information. Allowing one 
+question to pass ensures the system is not too strict, especially for questions that
+might hover near the relevance gate boundary.
 
 ---
 
-## 4. Something about your chunks
+## 4. Chunks come from distinct sections
+
+For at least 4 out of 5 of my questions, the sampled chunk starts with a section title of
+format "## <Section Title>". 
 
 <!-- YOU WRITE THIS ONE.
 
@@ -72,12 +84,19 @@ in at least 4 of 5 tries.
 
 
 **Why this target:**
-
+I picked this target because each of the 14 documents in my corpus is formatted 
+with a title, beginning with "#", and sections beginning with "##". I know if my
+chunks are the right size if I can clearly tell which section the system's answers
+are from. Without this information, it is difficult to tell where the system is getting
+its info. This is especially true for my criteria questions, as 4 out of 5 can be clearly
+sourced from a specific document. The fifth, and most complex, question may fail this criteria.
 
 
 ---
 
-## 5. Your choice
+## 5. All information is located from the correct documents
+For 4 out of 5 of the answers, the retrieved chunks are sourced from the correct
+documents.
 
 <!-- YOU WRITE THIS ONE TOO.
 
@@ -90,7 +109,11 @@ in at least 4 of 5 tries.
 
 
 **Why this target:**
-
+For 4 out of 5 of the questions, their answers can be sourced back to a single 
+document whose title is clearly found in the question. Answers coming from other
+documents may be subject to scrutiny. There is leeway for the last question, as 
+it spans multiple documents, meaning the system might have difficulty narrowing
+down which documents are the correct source.
 
 
 ---
