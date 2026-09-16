@@ -174,8 +174,13 @@ non-corpus questions range between 0.78-0.93. Seeing this, I decided to put my r
      Milestone 5. -->
 
 **1.**
+To put a number to my chunk size, I asked Claude to analyze the 14 documents and tell me what the longest section
+character count was. It returned a specific number in the 700s, so I increased the chunk size to 1000 as a ceiling
+to ensure no characters escaped.
 
 **2.**
+I asked Claude to look over my code for the section chunking and help me debug. It did as such, but made some
+formatting changes that I didn't ask for, which I ignored.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
