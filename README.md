@@ -249,25 +249,20 @@ options hopefully allow for more accurate and complete answers.
 
 ### Run Log — After
 
-<!-- Same format, same five criteria, three runs each.
-     `python run_eval.py --label after` -->
-
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Chunks come from distinct sections | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 5. All information is located from the correct documents | 4 of 5 | 4/5 | 4/5 | 4/5 | MET |
 
 **Did it help?**
 
-<!-- Say plainly whether it did, and how you know. If it made things worse,
-     say that — a change that backfired, honestly reported, earns full credit
-     and is more interesting than one that worked. What matters is that you can
-     tell.
-
-     Milestone 4. -->
+Changing the wording for question 3 did help. There was no longer any ambiguity, resulting in a clear, correct answer.
+The grounding instruction did not help and seems to have the answers move in a direction I did not intend. Contrary to
+making longer, more complete answers as I had intended, the model seems to have made the answers even shorter, no longer
+adding context to the answers it does give. For question 5, some locations are still missing.
 
 ## What's Still Broken
 
