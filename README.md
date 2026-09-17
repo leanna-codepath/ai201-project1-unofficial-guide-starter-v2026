@@ -209,15 +209,64 @@ formatting changes that I didn't ask for, which I ignored.
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunk contains the answer | 4 of 5 | 3/5 | 3/5 | 4/5 | MISSED |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. Gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Chunks come from distinct sections | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 5. All information is located from the correct documents | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
 
 <!-- Underneath, paste the REAL output for each criterion from one of your
      runs — the actual text your system produced, not a description of it.
      Name the file and function that produced it. -->
+
+**Criterion 1** Scored manually by checking if each answer in the before log had the expected answer in the
+`expects` list appeared in the answer. From the before log:
+
+| Question | Run 1 | Run 2 | Run 3 |
+|---|---|---|---|
+| How many shops does Elder Ness have? | pass  | pass  | pass  |
+| How often do buses run in Halden Bay in a day? | pass  | pass  | pass  |
+| In what year did the pier in Pellew Sands catch on fire? | pass  | pass  | pass  |
+| Does Brightwater or Corry Vale have cheaper accommodations? | fail  | fail  | pass  |
+| Which places are busiest in October? | fail  | fail  | fail  |
+
+**Criterion 2**  Read off the answers frpm the before log, produced by `generate.py::answer_from_chunks`.
+Each of the answers in the before log names at least one source file.
+
+```
+Based on the provided documents, Elder Ness has one shop (guide_elder_ness.md and guide_eating.md).
+```
+
+**Criterion 3** Produced by `run_eval.py::check_out_of_scope`, text comes form the before log
+
+| Out-of-scope question | Best distance | Gate |
+|---|---|---|
+| What is the capital of Mongolia? | 0.785 | refused |
+| How do I change the oil in a diesel engine? | 0.883 | refused |
+| Who won the 1994 World Cup? | 0.935 | refused |
+| What is the recommended dosage of ibuprofen for a headache? | 0.848 | refused |
+| How do I write a for loop in Rust? | 0.842 | refused |
+
+**Criterion 4** The five chunks analyzed were produced by `chunker.py::split_documents` and each
+can be seen to have a label in the form `<Title>, <Section Title>`.
+
+```
+Getting around the region, The railway
+
+The line runs along the river valley, connecting Brightwater to the regional
+hub in 50 minutes. Eleven services a day on weekdays, six on Sundays. The line
+north of Brightwater closed in 1963 and everything beyond it is bus or car.
+```
+
+**Criterion 5** Scored manually by double checking the sources given by the answers in the
+before log with the sources I expected.
+
+```
+- Sources retrieved: guide_elder_ness.md, guide_halden_bay.md, guide_marchwood.md, guide_pellew_sands.md, guide_seasons.md
+
+Marchwood has conference weeks in October that fill the hotels and double the prices (guide_marchwood.md). Elder Ness is visited for birds from September to October (guide_elder_ness.md).
+```
+
 
 ## Verdicts
 
