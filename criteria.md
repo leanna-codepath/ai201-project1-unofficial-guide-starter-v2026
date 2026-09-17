@@ -105,6 +105,13 @@ sourced from a specific document. The fifth, and most complex, question may fail
 ## 5. All information is located from the correct documents
 For 4 out of 5 of the answers, the retrieved chunks are sourced from the correct
 documents.
+         > **Revised in unit 2:** "For 4 out of 5 of the answers, the retrieved chunks are
+         > sourced from documents with information that answers the questions.
+         >
+         > **Why revised:**
+         > I realized that what I may think of as "the correct documents" may not be the same
+         > for others testing this criteria. As such, the wording was changed to clarify what
+         > documents may count as "correct".
 
 <!-- YOU WRITE THIS ONE TOO.
 
