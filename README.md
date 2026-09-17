@@ -266,17 +266,31 @@ adding context to the answers it does give. For question 5, some locations are s
 
 ## What's Still Broken
 
-<!-- For each criterion still missed after your fix: what you'd do about it,
-     and why you stopped where you did.
+According to the criterion, nothing is still broken. But when it comes to the models and the quesitons, there are certain things
+to consider.
 
-     "I ran out of time" is fine if it's true. Pretending nothing is left is
-     not.
+**Model Changes** 
+As mentioned above, the changes made to the model seemed to have been to the deteriment of some of the
+answers. It also did not fix the problem I was originally trying to solve, which is questions that 
+have multiple answers. I suspect that rewriting some of the rules or adjusting the top-k value might
+have been a better adjustment but that is not the fix I made.
 
-     Milestone 5. -->
+**Lack of Depth in Questions**
+Most of the questions had clear, singular answers that the system was easily able to find. The one
+question that revealed problems was the question that went against that pattern. Rather than question how
+well my system ran, it seems most of my questions just tested that it ran.
 
 ## What I'd Do Differently
 
-<!-- Knowing what you know now — which of your five criteria would you write
-     differently, and why?
+**The Question Set**
+I had difficulty choosing my questions because I wanted to ensure that they had clear answers and
+were easily answered/replicable by others. I think focusing too much on this standard was to my
+deteriment, as most of my questions don't challenge my system. If I was to do this differently, 
+I would come up with questions that still had clear answers to people, but where less to clear 
+to a model. For example, questions that had multiple answers scattered across documents, had
+answers with less clear wording, etc.
 
-     Milestone 5. -->
+**Criterion 4**
+While criterion 4 helped me with my chunking strategy, after I was content with my chunker it
+became more of a giveaway criterion. If I were to do this again I would focus more on the actual
+content of my chunks and whether the chunks I was getting were actually the best options.
