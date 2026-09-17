@@ -213,32 +213,39 @@ criterion, changing it from a 4/5 to a 5/5 for each run. Either case hits the ta
 
 ## Diagnoses
 
-<!-- For each miss: which stage caused it, and how. The stage alone isn't
-     enough — you need the mechanism.
+**Criterion 1 - Generation**
+These criterion misses for two questions: Question 3 and Question 5.
 
-     Not a diagnosis: "Question 3 didn't work."
-     A diagnosis:     "Question 3 asks about laundry costs. The answer is in
-                       one sentence that got split across two chunks, so
-                       neither chunk on its own contains it."
+Question 3 is a testing error, not a pipeline error. I did not realize until running the questions
+that there is a user error. The question asks which place has the cheaper accomodations, Bridgewater or Cory Vale, but the corpous does not have enough information to say which is the right answer. What should have been asked is which accomodations in Brightwater are the cheapest,
+as `guide_brightwater.md` says 'the guesthouses on Corry Lane are better value'.
 
-     The five stages: loading → chunking → embedding → retrieval → generation.
+For question 5, the issue stems from a strict prompts in the `GROUNDING_INSTRUCTION` stating that
+the answers should be kept brief. The result is that the answers from all three runs are partially
+correct, containing 2/3 out the expected locations. But because the instructions tell the system
+to truncate, it's forced the choose between the best options.
 
-     Look for a pattern. If three misses all ask about numbers, that's one
-     problem, not three.
-
-     Missed nothing? Say so, then say honestly whether your targets were set
-     low, and which one you'd tighten and to what.
-
-     Milestone 3. -->
 
 ## The Improvement
 
 **What I changed:**
+For question 3, I changed what the question asks so that it has a more specific answer. Rather than asking "Does Brightwater or Corry Vale have cheaper accommodations?", it asks "Which accomodations in Brightwater are the cheapest?".
+
+For question 5, I added the following rules to `GROUNDING_INSTRUCTION` in `generate.py` which
+attempts to balance the brevity originally there while also allowing for longer answers if the best
+answer requires it. The rest of the system remains the same.
+
+```
+- If the question asks which places, or otherwise has more than one answer,
+  list every one the documents support — one per line — before anything else.
+  Completeness matters more than brevity for these.
+- Be brief for questions with a single answer. Two or three sentences.
+```
 
 **Why I picked it:**
-
-<!-- Connect it to a specific diagnosis above in one sentence. If you can't,
-     you picked a fix because it sounded impressive. -->
+Diagnosis placed the problem at generation as all runs had the same documents and similar chunks.
+As such, the problem must lie in the generation and what the model is picking. Widening the model's
+options hopefully allow for more accurate and complete answers.
 
 ### Run Log — After
 
